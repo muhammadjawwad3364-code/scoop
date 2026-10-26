@@ -154,6 +154,18 @@ a{color:#3B1E54}a:hover{color:#D6336C}
 .hcol{zoom:.6}
 .pscene{zoom:.58}
 }
+.wd{display:inline-block}
+.kick{font-size:14px;font-weight:700;letter-spacing:2px;color:#D6336C}
+.fright{display:flex;flex-direction:column;align-items:flex-end;gap:14px}
+.flinks{display:flex;flex-wrap:wrap;gap:4px 24px;justify-content:flex-end}
+.flink{color:#fff;text-decoration:none;font-size:17px;font-weight:600;padding:10px 2px;border-bottom:2px solid transparent;transition:color .2s,border-color .2s}
+.flink:hover{color:#FFB3D1;border-bottom-color:#FFB3D1}
+.flink.on{color:#FF8FB8}
+@media (max-width:900px){
+.fright{align-items:flex-start;gap:8px}
+.flinks{justify-content:flex-start;gap:0 20px}
+.flink{font-size:16px}
+}
 </style>
 </head>
 <body>
@@ -169,9 +181,9 @@ a{color:#3B1E54}a:hover{color:#D6336C}
 <div class="tb-sp"></div>
 <div class="tb-links" style="display:flex;align-items:center;gap:22px;flex-wrap:wrap">
 <a class="nl2" href="index.html">Home</a>
-<a class="nl2" href="#">About</a>
+<a class="nl2" href="about.html">About</a>
 <a class="nl2" href="shops.html" style="color:#FF8FB8">Shops</a>
-<a class="nl2" href="#">Contact Us</a>
+<a class="nl2" href="contact.html">Contact Us</a>
 </div>
 </div>
 <button id="logo-face" class="logo {{ faceCls }}" aria-label="Scoopy logo. Click to turn it into a smiley face and back" aria-pressed="{{ facePressed }}" onClick="{{ toggleFace }}" style="position:absolute;left:50%;top:0;transform:translateX(-50%);width:170px;height:100px;border:0;padding:0;margin:0;border-radius:0 0 85px 85px;background-color:#3B1E54;overflow:hidden;cursor:pointer;font-family:inherit;font-size:36px;font-weight:700;color:#FF8FB8;text-shadow:0 3px 0 rgba(0,0,0,.3)"><span class="lt lS">S</span><span class="lt lc">c</span><span class="lt lo1">o</span><span class="lt lo2">o</span><span class="lt lp">p</span><span class="lt ly">y</span><i class="smile"></i><i class="ball b1"><i class="pupil"><i class="dot"></i></i></i><i class="ball b2"><i class="pupil"><i class="dot"></i></i></i></button>
@@ -180,7 +192,7 @@ a{color:#3B1E54}a:hover{color:#D6336C}
 
 <div class="spad" style="max-width:1280px;margin:0 auto;padding:0 32px;box-sizing:border-box">
 <div class="shead" style="text-align:center;padding:72px 0 36px">
-<h1 class="h1s" style="margin:0;font-weight:700;font-size:clamp(44px,6.5vw,88px);line-height:1;color:#fff;text-shadow:1px 1px 0 #D6336C,2px 2px 0 #D6336C,3px 3px 0 #D6336C,4px 4px 0 #D6336C,5px 5px 0 #D6336C,6px 6px 0 #D6336C,0 16px 20px rgba(59,30,84,.28)">Find Our Scoop Shops</h1>
+<h1 class="h1s" style="margin:0;font-weight:700;font-size:clamp(44px,6.5vw,88px);line-height:1;color:#fff;text-shadow:1px 1px 0 #D6336C,2px 2px 0 #D6336C,3px 3px 0 #D6336C,4px 4px 0 #D6336C,5px 5px 0 #D6336C,6px 6px 0 #D6336C,0 16px 20px rgba(59,30,84,.28)"><span class="wd">Find</span> <span class="wd">Our</span> <span class="wd">Scoop</span> <span class="wd">Shops</span></h1>
 <p class="shp" style="margin:24px auto 0;max-width:620px;font-size:24px;line-height:1.4;font-weight:500">Tap a shop pin and our ice cream van will cruise through the city streets to get there!</p>
 </div>
 
@@ -188,28 +200,28 @@ a{color:#3B1E54}a:hover{color:#D6336C}
 
 <div class="shcam" style="position:absolute;left:50%;top:80%;width:0;height:0;transform-style:preserve-3d;transform:rotateX(58deg) scale(1.3)">
 
-<div id="world" style="position:absolute;left:0;top:0;width:0;height:0;transform-style:preserve-3d;transform-origin:0 0">
+<div id="world" style="position:absolute;left:0;top:0;width:0;height:0;transform-style:preserve-3d;transform-origin:0 0;will-change:transform">
 <div style="position:absolute;left:0;top:0;width:0;height:0">
 <sc-for list="{{ flatA }}" as="f" hint-placeholder-count="8"><div style="{{ f.style }}"></div></sc-for>
 <sc-for list="{{ flatB }}" as="f" hint-placeholder-count="8"><div style="{{ f.style }}"></div></sc-for>
 </div>
-<sc-for list="{{ solids }}" as="w" hint-placeholder-count="12"><div style="{{ w.style }}"></div></sc-for>
+<sc-for list="{{ chunks }}" as="ch" hint-placeholder-count="4"><div class="chunk" style="position:absolute;left:0;top:0;width:0;height:0;transform-style:preserve-3d"><sc-for list="{{ ch.faces }}" as="w" hint-placeholder-count="6"><div style="{{ w.style }}"></div></sc-for></div></sc-for>
 <sc-for list="{{ cars }}" as="c" hint-placeholder-count="4">
 <div class="{{ c.cls }}" style="{{ c.style }}" >
 <sc-for list="{{ c.faces }}" as="w" hint-placeholder-count="6"><div style="{{ w.style }}"></div></sc-for>
 </div>
 </sc-for>
 <sc-for list="{{ markers }}" as="m" hint-placeholder-count="6">
-<div style="position:absolute;left:0;top:0;width:0;height:0;transform-style:preserve-3d;transform:translate3d({{ m.cx }}px,{{ m.cy }}px,{{ m.z }}px)">
-<div class="mkb" style="position:absolute;left:-70px;top:-122px;width:140px;height:122px;transform-origin:70px 122px;transform:rotateZ(calc(var(--hd) * 1deg)) rotateX(-58deg)">
-<div class="mkf" style="position:relative;width:140px;height:122px">
+<div class="mkw" style="position:absolute;left:0;top:0;width:0;height:0;transform-style:preserve-3d;transform:translate3d({{ m.cx }}px,{{ m.cy }}px,{{ m.z }}px)">
+<div class="mkb" style="position:absolute;left:-70px;top:-122px;width:140px;height:122px;transform-origin:70px 122px;transform:rotateX(-58deg)">
+<div class="{{ m.fcls }}" style="position:relative;width:140px;height:122px">
 <button class="mk-btn" aria-label="{{ m.name }}" onClick="{{ m.go }}" style="position:relative;width:140px;height:122px;transform:scale({{ m.scale }});transform-origin:70px 122px;transition:transform .25s ease-out">
-<div style="position:absolute;left:50%;top:0;transform:translateX(-50%);white-space:nowrap;background:{{ m.pillBg }};color:{{ m.pillColor }};font-family:Fredoka,sans-serif;font-size:14px;font-weight:700;padding:4px 12px;border-radius:999px;box-shadow:0 4px 10px rgba(59,30,84,.3)">{{ m.name }}</div>
-<div class="ring" style="position:absolute;left:39px;top:30px;width:62px;height:62px;border-radius:50%;border:3px solid {{ m.glow }}"></div>
-<div style="position:absolute;left:36px;top:28px;width:68px;height:68px;border-radius:50%;background:linear-gradient(145deg,#C9B0FF 0%,#8E5CF0 48%,#FF8FB8 100%);box-shadow:0 8px 16px rgba(59,30,84,.35),0 0 0 3px #fff,0 0 18px {{ m.glow }}"></div>
-<div style="position:absolute;left:43px;top:35px;width:54px;height:54px;border-radius:50%;background:radial-gradient(circle at 32% 25%,#fff 0,#F4EEFF 55%,#E0D2FF 100%);box-shadow:inset 0 -4px 6px rgba(120,80,200,.25)"></div>
+<div style="position:absolute;left:50%;top:0;transform:translateX(-50%);white-space:nowrap;background:{{ m.pillBg }};color:{{ m.pillColor }};font-family:Fredoka,sans-serif;font-size:14px;font-weight:700;padding:4px 12px;border-radius:999px;box-shadow:0 3px 0 rgba(59,30,84,.25)">{{ m.name }}</div>
+<sc-if value="{{ m.on }}" hint-placeholder-val="{{ false }}"><div class="ring" style="position:absolute;left:39px;top:30px;width:62px;height:62px;border-radius:50%;border:3px solid #FFE066"></div></sc-if>
+<div style="position:absolute;left:36px;top:28px;width:68px;height:68px;border-radius:50%;background:linear-gradient(145deg,#C9B0FF 0%,#8E5CF0 48%,#FF8FB8 100%);box-shadow:{{ m.badgeShadow }}"></div>
+<div style="position:absolute;left:43px;top:35px;width:54px;height:54px;border-radius:50%;background:radial-gradient(circle at 32% 25%,#fff 0,#F4EEFF 55%,#E0D2FF 100%)"></div>
 <svg style="position:absolute;left:49px;top:39px" width="42" height="46" viewBox="0 0 48 52"><path d="M15 27h18L24 49z" fill="#F2B25C" stroke="#B87420" stroke-width="1.5" stroke-linejoin="round"/><path d="M19 31l5 14M29 31l-5 14M17 36h14M20 41h8" stroke="#B87420" stroke-width="1" opacity=".55"/><path d="M12 25c0-6 5-10 12-10s12 4 12 10c0 2-2 3-4 2l-3 4-3-3-3 4-3-4-3 3-3-4c-2 1-4 0-4-2z" fill="{{ m.c2 }}"/><circle cx="24" cy="15" r="9.5" fill="{{ m.c1 }}"/><ellipse cx="20" cy="11.5" rx="3.6" ry="2.2" fill="#fff" opacity=".6"/><rect x="26" y="9" width="2.4" height="6" rx="1.2" fill="#fff" transform="rotate(30 27 12)"/><rect x="18" y="16" width="2.4" height="6" rx="1.2" fill="#FFE066" transform="rotate(-30 19 19)"/><rect x="29" y="18" width="2.4" height="6" rx="1.2" fill="#7CC8FF" transform="rotate(60 30 21)"/><circle cx="24" cy="4.6" r="3.4" fill="#E0243F"/><circle cx="23" cy="3.6" r="1" fill="#fff" opacity=".8"/></svg>
-<div style="position:absolute;left:62px;top:92px;width:0;height:0;border-left:8px solid transparent;border-right:8px solid transparent;border-top:12px solid #fff;filter:drop-shadow(0 3px 2px rgba(59,30,84,.3))"></div>
+<div style="position:absolute;left:62px;top:92px;width:0;height:0;border-left:8px solid transparent;border-right:8px solid transparent;border-top:12px solid #fff"></div>
 </button>
 </div>
 </div>
@@ -218,7 +230,7 @@ a{color:#3B1E54}a:hover{color:#D6336C}
 </div>
 
 <div style="position:absolute;left:0;top:0;width:0;height:0;transform-style:preserve-3d">
-<div style="position:absolute;left:-44px;top:-66px;width:88px;height:150px;border-radius:50%;background:rgba(59,30,84,.28);filter:blur(5px);transform:translate3d(0,6px,0.5px)"></div>
+<div style="position:absolute;left:-44px;top:-66px;width:88px;height:150px;border-radius:50%;background:radial-gradient(ellipse at 50% 50%,rgba(59,30,84,.42) 0,rgba(59,30,84,.28) 55%,rgba(59,30,84,0) 72%);transform:translate3d(0,6px,0.5px)"></div>
 <div id="van" style="position:absolute;left:0;top:0;width:0;height:0;transform-style:preserve-3d">
 <div style="position:absolute;left:-30.0px;top:-50.0px;width:60px;height:100px;transform:translate3d(0px,17px,70px);background:repeating-linear-gradient(90deg,#FF8FB8 0 10px,#fff 10px 20px);box-shadow:inset 0 0 0 3px #3B1E54;border-radius:8px"></div>
 <div style="position:absolute;left:-30.0px;top:-30.0px;width:60px;height:60px;transform:translate3d(0px,67px,40px) rotateX(-90deg);background:linear-gradient(180deg,#fff 0 42%,#FF8FB8 42% 100%);box-shadow:inset 0 0 0 3px #3B1E54;border-radius:6px"><div style="position:absolute;left:5px;top:6px;width:24px;height:22px;border-radius:6px;background:linear-gradient(135deg,#BDEBFF,#7CC8FF);box-shadow:inset 0 0 0 3px #3B1E54"></div><div style="position:absolute;left:31px;top:6px;width:24px;height:22px;border-radius:6px;background:linear-gradient(135deg,#BDEBFF,#7CC8FF);box-shadow:inset 0 0 0 3px #3B1E54"></div><div style="position:absolute;left:29px;top:0;width:3px;height:60px;background:#3B1E54"></div><div style="position:absolute;left:21px;top:34px;width:18px;height:13px;border-radius:3px;background:#FFF4E0;box-shadow:inset 0 0 0 2px #3B1E54;font-family:Fredoka,sans-serif;font-size:7px;font-weight:700;color:#3B1E54;text-align:center;line-height:13px">SCOOPY</div><div style="position:absolute;left:3px;top:46px;width:10px;height:10px;border-radius:50%;background:#E0243F;box-shadow:0 0 6px #E0243F,inset 0 0 0 2px #3B1E54"></div><div style="position:absolute;right:3px;top:46px;width:10px;height:10px;border-radius:50%;background:#E0243F;box-shadow:0 0 6px #E0243F,inset 0 0 0 2px #3B1E54"></div></div>
@@ -251,7 +263,7 @@ a{color:#3B1E54}a:hover{color:#D6336C}
 <div style="margin-top:2px;font-size:20px;font-weight:600;line-height:1.2">{{ status }}</div>
 </div>
 
-<div class="mmap" style="position:absolute;right:18px;bottom:18px;z-index:20;width:236px;height:168px;border-radius:22px;overflow:hidden;border:4px solid #fff;box-sizing:border-box;background:#E9E2D4;box-shadow:0 6px 0 #9AA9D6">
+<div class="mmap" style="position:absolute;right:18px;bottom:18px;z-index:20;width:236px;height:168px;border-radius:22px;overflow:hidden;border:4px solid #fff;box-sizing:border-box;background:#3F9D5B;box-shadow:0 6px 0 #9AA9D6">
 <sc-for list="{{ mmRoads }}" as="r" hint-placeholder-count="8"><div style="{{ r.style }}"></div></sc-for>
 <sc-for list="{{ mmShops }}" as="d" hint-placeholder-count="6">
 <button aria-label="{{ d.name }}" onClick="{{ d.go }}" style="position:absolute;left:{{ d.x }}px;top:{{ d.y }}px;width:18px;height:18px;margin:-9px 0 0 -9px;border-radius:50%;border:3px solid {{ d.ring }};background:{{ d.c1 }};padding:0;cursor:pointer"></button>
@@ -282,11 +294,14 @@ a{color:#3B1E54}a:hover{color:#D6336C}
 <div style="font-size:32px;font-weight:700">Scoopy</div>
 <div style="margin-top:6px;font-size:18px;font-weight:500">Made with sprinkles and giggles. [YOUR ADDRESS]</div>
 </div>
+<div class="fright">
+<nav class="flinks" aria-label="Footer"><a class="flink" href="index.html">Home</a><a class="flink" href="about.html">About</a><a class="flink on" href="shops.html" aria-current="page">Shops</a><a class="flink" href="contact.html">Contact Us</a></nav>
 <div style="display:flex;gap:14px;flex-wrap:wrap">
 <a class="soc" href="#" aria-label="Instagram"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg></a>
 <a class="soc" href="#" aria-label="Facebook"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 8h3V4h-3a4 4 0 0 0-4 4v3H7v4h3v6h4v-6h3l1-4h-4V8z"/></svg></a>
 <a class="soc" href="#" aria-label="X"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M4 4l16 16M20 4L4 20"/></svg></a>
 <a class="soc" href="#" aria-label="YouTube"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="5.5" width="19" height="13" rx="4"/><path d="M10 9.5l5 2.5-5 2.5z" fill="currentColor"/></svg></a>
+</div>
 </div>
 </div>
 </div>
@@ -322,7 +337,7 @@ const rnd = () => { seed |= 0; seed = (seed + 0x6D2B79F5) | 0; let t = Math.imul
 const pick = (a) => a[Math.floor(rnd() * a.length)];
 const hex = (h) => [parseInt(h.slice(1, 3), 16), parseInt(h.slice(3, 5), 16), parseInt(h.slice(5, 7), 16)];
 const shade = (h, f) => 'rgb(' + hex(h).map((v) => Math.max(0, Math.min(255, Math.round(v * f)))).join(',') + ')';
-const OL = 'box-shadow:inset 0 0 0 2px rgba(59,30,84,.32);';
+const OL = 'box-shadow:inset 0 0 0 2px rgba(59,30,84,.32);backface-visibility:hidden;';
 const T = (x, y, z) => 'translate3d(' + x + 'px,' + y + 'px,' + z + 'px)';
 const face = (w, h, tf, bg, extra) => 'position:absolute;left:' + (-w / 2) + 'px;top:' + (-h / 2) + 'px;width:' + w + 'px;height:' + h + 'px;transform:' + tf + ';background:' + bg + ';' + OL + (extra || '');
 const FN = (x, y, z) => T(x, y, z) + ' rotateX(90deg) rotate(180deg)';
@@ -343,10 +358,10 @@ return [
 ];
 };
 const disc = (x, y, r, z, bg) => ({ style: 'position:absolute;left:' + (-r) + 'px;top:' + (-r) + 'px;width:' + (2 * r) + 'px;height:' + (2 * r) + 'px;border-radius:50%;background:' + bg + ';transform:' + T(x, y, z) + ';box-shadow:inset -2px -3px 0 rgba(0,0,0,.14)' });
-const tree = (x, y, s) => [disc(x, y, 3, 4, '#8D5A3B'), disc(x, y, 13 * s, 10, '#3FAE5F'), disc(x, y, 10 * s, 20, '#4FBF6B'), disc(x, y, 6 * s, 30, '#7AD88A')];
-const flatA = [], flatB = [], solids = [];
+const tree = (x, y, s) => [disc(x, y, 13 * s, 8, '#3FAE5F'), disc(x, y, 10 * s, 18, '#4FBF6B'), disc(x, y, 6 * s, 28, '#7AD88A')];
+const flatA = [], flatB = [], solids = [], chunks = [];
 const fl = (l, t, w, h, bg, extra) => ({ style: 'position:absolute;left:' + l + 'px;top:' + t + 'px;width:' + w + 'px;height:' + h + 'px;background:' + bg + ';' + (extra || '') });
-flatA.push(fl(RL - 1600, RT - 1400, (RR - RL) + 3200, (RB - RT) + 2800, '#E9E2D4'));
+flatA.push(fl(RL - 2200, RT - 2000, (RR - RL) + 4400, (RB - RT) + 4000, 'radial-gradient(circle at 50% 50%,#4DB86C 0 26%,#37995A 27% 50%,transparent 52%) 0 0/84px 84px,#2A7F49'));
 const SH = [
 ['sprinkle', 'Sprinkle Square', 1, 1, '#FF8FB8', '#7CC8FF', 'Sprinkle Street 12', '#FFE3F0', '#FF8FB8'],
 ['castle', 'Cone Castle', 3, 0, '#7DE0C0', '#FFE066', 'Castle Lane 5', '#E6F7FF', '#7CC8FF'],
@@ -366,6 +381,8 @@ const PARKS = [[2, 1], [2, 2], [5, 2]];
 const pal = ['#FFD6E8', '#FFF1B8', '#D9CCFF', '#C8F0E0', '#FFE4C2', '#CDE7FF', '#FFC9D9', '#E3D4FF'];
 for (let i = 0; i < AX.length - 1; i++) for (let j = 0; j < BY.length - 1; j++) {
 const bx = AX[i] + 40, by = BY[j] + 40;
+const cs = []; chunks.push({ cx: bx + 120, cy: by + 90, faces: cs });
+const solids = cs;
 const park = PARKS.some((q) => q[0] === i && q[1] === j);
 flatA.push(fl(bx, by, 240, 180, park ? '#8EDB8E' : '#F3EBDD', 'border-radius:14px;box-shadow:inset 0 0 0 4px ' + (park ? '#6FCB7C' : '#E4D8C2')));
 if (park) {
@@ -390,15 +407,15 @@ const hh = () => Math.round((36 + rnd() * 90) * hMul);
 const addB = (cx, cy, w, d) => {
 const h = hh(), base = pick(pal);
 box(cx, cy, w, d, h, base).forEach((f) => solids.push(f));
-if (h > 85) box(cx, cy, w * 0.6, d * 0.6, 22, base, { z: h }).forEach((f) => solids.push(f));
+
 };
 if (sh) {
 const cx = sh.cx, cy = sh.cy;
 const north = 'linear-gradient(#7B3FE4,#7B3FE4) 50% 100%/24px 36px no-repeat,linear-gradient(#BDEBFF,#BDEBFF) 14% 38%/26px 24px no-repeat,linear-gradient(#BDEBFF,#BDEBFF) 86% 38%/26px 24px no-repeat,' + shade(sh.body, 0.92);
 box(cx, cy, 120, 100, 62, sh.body, { win: false, north }).forEach((f) => solids.push(f));
 solids.push({ style: face(124, 28, T(cx, cy - 62, 42) + ' rotateX(25deg)', 'repeating-linear-gradient(90deg,' + sh.aw + ' 0 16px,#fff 16px 32px)') });
-for (let k = 0; k < 6; k++) solids.push(disc(cx, cy, 3 + k * 2.4, 66 + k * 5, k % 2 ? '#F2B25C' : '#E9A650'));
-[13, 18, 20, 18, 13, 6].forEach((r, k) => solids.push(disc(cx, cy, r, 100 + k * 6, k < 3 ? sh.c2 : sh.c1)));
+[4, 8, 12, 15].forEach((r, k) => solids.push(disc(cx, cy, r, 66 + k * 8, k % 2 ? '#F2B25C' : '#E9A650')));
+[17, 20, 17, 9].forEach((r, k) => solids.push(disc(cx, cy, r, 100 + k * 9, k < 2 ? sh.c2 : sh.c1)));
 solids.push(disc(cx, cy, 4.5, 138, '#E0243F'));
 addB(bx + 185, by + 90, 90, 160);
 addB(bx + 70, by + 150, 120, 50);
@@ -411,6 +428,21 @@ addB(bx + 62 + ci * 116, by + 90, 104, 160);
 }
 }
 }
+const jungle = (x0, y0, w, h, n, big) => {
+const cs2 = [];
+for (let q = 0; q < n; q++) {
+const x = x0 + 24 + rnd() * (w - 48), y = y0 + 24 + rnd() * (h - 48);
+const sz = (big ? 1.5 : 1) + rnd() * (big ? 1.1 : 0.9);
+cs2.push(disc(x, y, 15 * sz, 12, '#2F9152'), disc(x, y, 9 * sz, 28, '#46B166'));
+}
+chunks.push({ cx: x0 + w / 2, cy: y0 + h / 2, faces: cs2 });
+};
+for (let j = 0; j < BY.length - 1; j++) { jungle(RL, BY[j] + 40, AX[0] - 40 - RL, 180, 6, false); jungle(AX[AX.length - 1] + 40, BY[j] + 40, RR - AX[AX.length - 1] - 40, 180, 6, false); }
+for (let i = 0; i < AX.length - 1; i++) { jungle(AX[i] + 40, RT, 240, BY[0] - 40 - RT, 6, false); jungle(AX[i] + 40, BY[BY.length - 1] + 40, 240, RB - BY[BY.length - 1] - 40, 6, false); }
+for (let gx = RL - 960; gx < RR + 960; gx += 480) for (let gy = RT - 960; gy < RB + 960; gy += 480) {
+if (gx + 480 > RL && gx < RR && gy + 480 > RT && gy < RB) continue;
+jungle(gx, gy, 480, 480, 3, true);
+}
 // roads (all dry land: asphalt streets and avenues, crosswalks at every corner)
 const RC = '#8A82A8';
 for (let j = 0; j < BY.length; j++) flatB.push(fl(RL, BY[j] - 40, RR - RL, 80, RC));
@@ -422,17 +454,18 @@ flatB.push(fl(AX[i] - 40, BY[j] - 40, 80, 80, RC));
 flatB.push(fl(AX[i] - 34, BY[j] - 46, 68, 7, 'repeating-linear-gradient(90deg,#fff 0 6px,transparent 6px 12px)'));
 flatB.push(fl(AX[i] - 34, BY[j] + 39, 68, 7, 'repeating-linear-gradient(90deg,#fff 0 6px,transparent 6px 12px)'));
 }
-this.flatA = flatA; this.flatB = flatB; this.solids = solids;
+this.flatA = flatA; this.flatB = flatB; this.chunks = chunks;
+this.chunkMeta = chunks.map((c) => ({ x: c.cx, y: c.cy, vis: true }));
 // traffic
 const cp = ['#FF8FB8', '#FFE066', '#7CC8FF', '#B79CFF', '#7DE0C0', '#FFA94D'];
 const carDef = [
-['E', BY[1] + 16, 30, 0], ['W', BY[2] - 16, 34, -10], ['E', BY[4] + 16, 28, -14], ['W', BY[0] - 16, 36, -20], ['E', BY[6] + 16, 32, -6], ['W', BY[5] - 16, 30, -18],
-['S', AX[1] + 16, 34, -8], ['N', AX[4] - 16, 32, -16], ['S', AX[6] - 16, 36, -22]
+['E', BY[1] + 16, 30, 0], ['W', BY[2] - 16, 34, -10], ['E', BY[4] + 16, 28, -14], ['W', BY[0] - 16, 36, -20],
+['S', AX[1] + 16, 34, -8], ['N', AX[4] - 16, 32, -16]
 ];
 this.cars = carDef.map(([dir, pp, dur, delay], n) => {
 const h = dir === 'E' || dir === 'W';
 const c = cp[n % cp.length];
-const faces = box(0, 0, h ? 30 : 16, h ? 16 : 30, 9, c, { win: false }).concat(box(h ? -2 : 0, h ? 0 : -2, h ? 14 : 13, h ? 13 : 14, 7, '#EAF6FF', { z: 9, win: false }));
+const faces = box(0, 0, h ? 30 : 16, h ? 16 : 30, 9, c, { win: false }).concat([{ style: face(h ? 14 : 13, h ? 13 : 14, T(h ? -2 : 0, h ? 0 : -2, 14), '#EAF6FF') }]);
 let vars;
 if (h) vars = '--x0:' + (dir === 'E' ? RL : RR) + 'px;--x1:' + (dir === 'E' ? RR : RL) + 'px;--y:' + pp + 'px;';
 else vars = '--x:' + pp + 'px;--y0:' + (dir === 'S' ? RT : RB) + 'px;--y1:' + (dir === 'S' ? RB : RT) + 'px;';
@@ -452,6 +485,7 @@ const K = Math.min(228 / (RR - RL), 160 / (RB - RT));
 this.mmap = (x, y) => [(x - RL) * K, (y - RT) * K];
 const f1 = (v) => v.toFixed(1);
 this.mmRoads = [];
+this.mmRoads.push({ style: 'position:absolute;left:' + f1((AX[0] - 40 - RL) * K) + 'px;top:' + f1((BY[0] - 40 - RT) * K) + 'px;width:' + f1((AX[AX.length - 1] - AX[0] + 80) * K) + 'px;height:' + f1((BY[BY.length - 1] - BY[0] + 80) * K) + 'px;background:#E9E2D4;border-radius:3px' });
 AX.forEach((x) => this.mmRoads.push({ style: 'position:absolute;left:' + f1((x - 40 - RL) * K) + 'px;top:0;width:' + f1(80 * K) + 'px;height:100%;background:#F3EBDD' }));
 BY.forEach((y) => this.mmRoads.push({ style: 'position:absolute;left:0;top:' + f1((y - 40 - RT) * K) + 'px;width:' + f1((RR - RL) * K) + 'px;height:' + f1(80 * K) + 'px;background:#F3EBDD' }));
 PARKS.forEach(([i, j]) => this.mmRoads.push({ style: 'position:absolute;left:' + f1((AX[i] + 40 - RL) * K) + 'px;top:' + f1((BY[j] + 40 - RT) * K) + 'px;width:' + f1(240 * K) + 'px;height:' + f1(180 * K) + 'px;background:#6FCB7C;border-radius:3px' }));
@@ -492,6 +526,98 @@ if (!this.routeTo(s.stopX, s.stopY)) this.finish();
 }
 finish() { this.setState({ driving: false, arrived: true }); }
 componentDidMount() {
+const rvGo = (tries) => {
+if (typeof window === 'undefined' || !window.IntersectionObserver || !Element.prototype.animate) return;
+if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+const SEL = 'h1 .wd,h1,h2,h3,p,.btn,.icard,.wtile,.wcard,.pcard,.mban,.shopbtn,.mapvp,.cform,.hcol,.glass,.gcard,.gstep,.stat,.tl-item,.tabin,.fpad > *,[data-rv]';
+const SKIP = '.topbar,[role=dialog],#world,.hud,.mmap,.thanks,#scoop-cursor,.logo,.hint';
+let els = Array.prototype.slice.call(document.querySelectorAll(SEL)).filter((el) => !el.closest(SKIP) && !(el.tagName === 'H1' && el.querySelector('.wd')));
+if (!els.length) { if ((tries || 0) < 8) this.rvT = setTimeout(() => rvGo((tries || 0) + 1), 120); return; }
+const chosen = new Set(els);
+els = els.filter((el) => { for (let p = el.parentElement; p; p = p.parentElement) if (chosen.has(p)) return false; return true; });
+const T = {
+up: ['translateY(46px)', 'translateY(0px)', 950, 1],
+head: ['translateY(64px) rotate(2.5deg)', 'translateY(0px) rotate(0deg)', 1150, 1],
+word: ['translateY(85%) rotate(9deg) scale(.86)', 'translateY(0%) rotate(0deg) scale(1)', 1050, 1],
+card: ['translateY(64px) scale(.93)', 'translateY(0px) scale(1)', 1050, 0],
+scale: ['translateY(30px) scale(.9)', 'translateY(0px) scale(1)', 1250, 0],
+left: ['translateX(-80px)', 'translateX(0px)', 1150, 0],
+right: ['translateX(80px)', 'translateX(0px)', 1150, 0],
+down: ['translateY(-100%)', 'translateY(0%)', 900, 0],
+drop: ['translateY(-130%) rotate(-8deg)', 'translateY(0%) rotate(0deg)', 1100, 0]
+};
+const mk = (el, k, delay, ease) => {
+const t = T[k] || T.up;
+const fade = t[3] ? [{ opacity: 0, filter: 'blur(10px)' }, { opacity: 1, filter: 'blur(0px)' }] : [{ opacity: 0 }, { opacity: 1 }];
+const o = el.animate(fade, { duration: t[2] * 0.75, easing: 'cubic-bezier(.33,1,.68,1)', fill: 'backwards', delay: delay || 0 });
+const opts = { duration: t[2], easing: ease || 'cubic-bezier(.16,1,.3,1)', fill: 'backwards', delay: delay || 0, composite: 'add' };
+let m;
+try { m = el.animate([{ transform: t[0] }, { transform: t[1] }], opts); } catch (x) { delete opts.composite; m = el.animate([{ transform: t[0] }, { transform: t[1] }], opts); }
+return [o, m];
+};
+const kind = (el) => (el.dataset && el.dataset.rv) || (el.classList.contains('wd') ? 'word' : /^H[12]$/.test(el.tagName) ? 'head' : el.matches('.icard,.wtile,.wcard,.pcard,.shopbtn,.gcard,.gstep,.stat,.tl-item') ? 'card' : el.matches('.mban,.mapvp,.cform,.hcol,.glass') ? 'scale' : 'up');
+this.rvHead = [];
+const tb = document.querySelector('.topbar');
+if (tb) this.rvHead.push(...mk(tb, 'down', 0));
+const lg = document.getElementById('logo-face');
+if (lg) this.rvHead.push(...mk(lg, 'drop', 380, 'cubic-bezier(.34,1.56,.64,1)'));
+this.rvMap = new Map();
+els.forEach((el) => { const a = mk(el, kind(el), 0); a.forEach((x) => { x.pause(); x.currentTime = 0; }); this.rvMap.set(el, { el, a, done: false }); });
+const reveal = (it, delay) => { it.done = true; it.a.forEach((x) => { x.effect.updateTiming({ delay }); x.currentTime = 0; x.play(); }); };
+this.rvFirst = false;
+const io = new IntersectionObserver((ents) => {
+const vis = [];
+ents.forEach((e) => { if (e.isIntersecting) { const it = this.rvMap.get(e.target); if (it && !it.done) vis.push(it); } });
+if (!vis.length) return;
+vis.sort((a, b) => { const ra = a.el.getBoundingClientRect(), rb = b.el.getBoundingClientRect(); return (Math.round(ra.top / 8) - Math.round(rb.top / 8)) || (ra.left - rb.left); });
+const first = !this.rvFirst;
+this.rvFirst = true;
+vis.forEach((it, n) => { io.unobserve(it.el); reveal(it, (first ? 300 : 30) + Math.min(n, 12) * 90); });
+}, { rootMargin: '0px 0px -6% 0px', threshold: 0.06 });
+this.rvMap.forEach((it) => io.observe(it.el));
+this.rvIO = io;
+this.rvReplay = () => {
+this.rvFirst = false;
+this.rvHead.forEach((x) => { x.cancel(); x.play(); });
+this.rvMap.forEach((it) => { io.unobserve(it.el); it.done = false; it.a.forEach((x) => { x.pause(); x.effect.updateTiming({ delay: 0 }); x.currentTime = 0; }); });
+this.rvMap.forEach((it) => io.observe(it.el));
+if (this.cntReset) this.cntReset();
+};
+};
+rvGo(0);
+this.rvShow = (e) => { if (e.persisted && this.rvReplay) this.rvReplay(); };
+window.addEventListener('pageshow', this.rvShow);
+this.rvHidden = false;
+const rvAnchor = document.querySelector('.topbar');
+if (rvAnchor && window.IntersectionObserver) {
+this.rvVW = new IntersectionObserver((ents) => {
+ents.forEach((e) => {
+const r = e.boundingClientRect, rb = e.rootBounds;
+const gone = (r.width === 0 && r.height === 0) || (rb && (rb.width === 0 || rb.height === 0));
+if (gone) this.rvHidden = true;
+else if (this.rvHidden) { this.rvHidden = false; if (this.rvReplay) this.rvReplay(); }
+});
+});
+this.rvVW.observe(rvAnchor);
+}
+const cnt = Array.prototype.slice.call(document.querySelectorAll('[data-count]'));
+if (cnt.length && window.IntersectionObserver && !(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches)) {
+cnt.forEach((el) => { el.textContent = el.getAttribute('data-from') || '0'; });
+const runCount = (el) => {
+const to = +el.getAttribute('data-count'), from = +(el.getAttribute('data-from') || 0), dur = 2000, t0 = performance.now() + 250;
+const step = (now) => {
+const p = Math.min(1, Math.max(0, (now - t0) / dur));
+const e = 1 - Math.pow(1 - p, 4);
+el.textContent = String(Math.round(from + (to - from) * e));
+if (p < 1) el._cr = requestAnimationFrame(step);
+};
+el._cr = requestAnimationFrame(step);
+};
+const cio = new IntersectionObserver((ents) => { ents.forEach((e) => { if (e.isIntersecting) { cio.unobserve(e.target); runCount(e.target); } }); }, { threshold: 0.4 });
+cnt.forEach((el) => cio.observe(el));
+this.cntIO = cio;
+this.cntReset = () => { cnt.forEach((el) => { cancelAnimationFrame(el._cr); el.textContent = el.getAttribute('data-from') || '0'; cio.unobserve(el); cio.observe(el); }); };
+}
 
 const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
 let last = 0;
@@ -530,18 +656,41 @@ if (this.pending) { const p = this.pending; this.pending = null; if (!this.route
 else if (this.state.driving) this.finish();
 }
 this.pitch += (clamp(-accel * 0.004, -3, 3) - this.pitch) * 0.15;
-const world = document.getElementById('world');
-const van = document.getElementById('van');
-if (world) {
-world.style.transform = 'rotateZ(' + (-this.hd).toFixed(2) + 'deg) translate3d(' + (-this.vx).toFixed(1) + 'px,' + (-this.vy).toFixed(1) + 'px,0)';
-world.style.setProperty('--hd', this.hd.toFixed(2));
+let d = this.dom;
+if (!d || !d.world || !d.world.isConnected) { d = this.dom = { world: document.getElementById('world'), van: document.getElementById('van'), dot: document.getElementById('mm-van') }; this.chunkEls = null; this.mkbEls = null; }
+const wt = 'rotateZ(' + (-this.hd).toFixed(2) + 'deg) translate3d(' + (-this.vx).toFixed(1) + 'px,' + (-this.vy).toFixed(1) + 'px,0)';
+if (d.world && wt !== this.lastWt) {
+this.lastWt = wt;
+d.world.style.transform = wt;
+if (!this.mkbEls || !this.mkbEls.length) this.mkbEls = Array.prototype.slice.call(document.querySelectorAll('.mkb'));
+const mt = 'rotateZ(' + this.hd.toFixed(2) + 'deg) rotateX(-58deg)';
+for (let i = 0; i < this.mkbEls.length; i++) this.mkbEls[i].style.transform = mt;
+this.cullN = (this.cullN || 0) + 1;
+if (this.cullN % 6 === 1) {
+if (!this.chunkEls || this.chunkEls.length !== this.chunkMeta.length) this.chunkEls = Array.prototype.slice.call(document.querySelectorAll('#world .chunk'));
+const hr = this.hd * Math.PI / 180, sn = Math.sin(hr), cn = Math.cos(hr);
+for (let i = 0; i < this.chunkEls.length; i++) {
+const m = this.chunkMeta[i];
+const dx = m.x - this.vx, dy = m.y - this.vy;
+const f = dx * sn - dy * cn, l = dx * cn + dy * sn;
+const vis = f > -650 && f < 2000 && Math.abs(l) < 700 + 0.6 * Math.max(f, 0);
+if (vis !== m.vis) { m.vis = vis; this.chunkEls[i].style.display = vis ? '' : 'none'; }
 }
-if (van) {
+if (!this.mkwEls || !this.mkwEls.length) { this.mkwEls = Array.prototype.slice.call(document.querySelectorAll('.mkw')); this.mkwVis = []; }
+for (let i = 0; i < this.mkwEls.length && i < this.shops.length; i++) {
+const dx = this.shops[i].cx - this.vx, dy = this.shops[i].cy - this.vy;
+const f = dx * sn - dy * cn, l = dx * cn + dy * sn;
+const vis = f > -650 && f < 2300 && Math.abs(l) < 800 + 0.7 * Math.max(f, 0);
+if (vis !== this.mkwVis[i]) { this.mkwVis[i] = vis; this.mkwEls[i].style.display = vis ? '' : 'none'; }
+}
+}
+}
+if (d.van) {
 const bob = Math.sin(t / 55) * Math.min(1, this.v / 380) * 0.9;
-van.style.transform = 'translateZ(' + bob.toFixed(2) + 'px) rotateY(' + this.roll.toFixed(2) + 'deg) rotateX(' + this.pitch.toFixed(2) + 'deg)';
+const vt = 'translateZ(' + bob.toFixed(2) + 'px) rotateY(' + this.roll.toFixed(2) + 'deg) rotateX(' + this.pitch.toFixed(2) + 'deg)';
+if (vt !== this.lastVt) { this.lastVt = vt; d.van.style.transform = vt; }
 }
-const dot = document.getElementById('mm-van');
-if (dot) { const p = this.mmap(this.vx, this.vy); dot.style.left = p[0].toFixed(1) + 'px'; dot.style.top = p[1].toFixed(1) + 'px'; }
+if (d.dot) { const pp = this.mmap(this.vx, this.vy); const dt2 = 'translate(' + pp[0].toFixed(1) + 'px,' + pp[1].toFixed(1) + 'px)'; if (dt2 !== this.lastDt) { this.lastDt = dt2; d.dot.style.transform = dt2; } }
 };
 this.raf = requestAnimationFrame(tick);
 if (!document.getElementById('scoop-cursor')) {
@@ -579,6 +728,11 @@ document.addEventListener('mouseup', this.mu);
 document.documentElement.addEventListener('mouseleave', this.ml);
 }
 componentWillUnmount() {
+if (this.rvIO) this.rvIO.disconnect();
+if (this.cntIO) this.cntIO.disconnect();
+if (this.rvVW) this.rvVW.disconnect();
+if (this.rvShow) window.removeEventListener('pageshow', this.rvShow);
+clearTimeout(this.rvT);
 cancelAnimationFrame(this.raf);
 document.removeEventListener('mousemove', this.mm);
 document.removeEventListener('mousedown', this.md);
@@ -592,7 +746,7 @@ const st = this.state;
 const sel = st.sel;
 const mk = this.shops.map((s) => {
 const on = sel === s.id;
-return { ...s, go: () => this.go(s.id), scale: on ? 1.22 : 1, pillBg: on ? '#D6336C' : '#fff', pillColor: on ? '#fff' : '#3B1E54', glow: on ? '#FFE066' : 'rgba(183,156,255,.7)', z: 62 + 100 };
+return { ...s, go: () => this.go(s.id), scale: on ? 1.22 : 1, pillBg: on ? '#D6336C' : '#fff', pillColor: on ? '#fff' : '#3B1E54', on, fcls: on ? 'mkf' : '', badgeShadow: on ? '0 0 0 3px #fff,0 0 0 8px #FFE066,0 6px 0 rgba(59,30,84,.3)' : '0 0 0 3px #fff,0 5px 0 rgba(59,30,84,.3)', z: 62 + 100 };
 });
 const cur = this.shops.find((s) => s.id === sel);
 const status = !cur ? 'Tap a shop pin to send the van!' : (st.driving ? 'Driving to ' + cur.name + '...' : 'Arrived at ' + cur.name + '! Ding ding!');
@@ -600,7 +754,7 @@ return {
 faceCls: this.state.face ? 'face' : '',
 facePressed: String(!!this.state.face),
 toggleFace: () => this.setState({ face: !this.state.face }),
-flatA: this.flatA, flatB: this.flatB, solids: this.solids, cars: this.cars, vanDiscs: this.vanDiscs,
+flatA: this.flatA, flatB: this.flatB, chunks: this.chunks, cars: this.cars, vanDiscs: this.vanDiscs,
 markers: mk,
 mmRoads: this.mmRoads,
 mmShops: this.shops.map((s) => { const p = this.mmap(s.stopX, s.stopY); return { name: s.name, c1: s.c1, x: p[0].toFixed(1), y: p[1].toFixed(1), ring: sel === s.id ? '#D6336C' : '#fff', go: () => this.go(s.id) }; }),
